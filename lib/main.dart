@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:hive/hive.dart';
 import 'package:todoapp/adapters/todoadapters.dart';
 import 'package:todoapp/views/todo_view.dart';
 
 void main(List<String> args) async {
-  WidgetsFlutterBinding.ensureInitialized();
+  // WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   Hive.registerAdapter(TodoAdapter());
-  await Hive.openBox('todo');
+  await Hive.openBox<Todo>('todo');
   runApp(const MyApp());
 }
 
@@ -17,9 +16,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return  MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: ToDoView(),
+      theme: ThemeData.dark(),
+      home: const ToDoView(),
     );
   }
 }
